@@ -1,5 +1,8 @@
 package com.cooksys.ftd.assignments.control;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
@@ -15,7 +18,7 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
  * The exact message format for this assignment is specified in the `message(n)` method.
  */
 public class FizzBuzz {
-
+	
     /**
      * Checks whether a given int `a` is evenly divisible by a given int `b` or not.
      * For example, `divides(4, 2)` returns `true` and `divides(4, 3)` returns `false`.
@@ -25,9 +28,16 @@ public class FizzBuzz {
      * @return `true` if a is evenly divisible by b, `false` otherwise
      * @throws IllegalArgumentException if b is zero
      */
-    public static boolean divides(int a, int b) throws IllegalArgumentException {
-        throw new NotImplementedException();
+    public static boolean divides(int a, int b)  {
+        boolean isDivisbleByB;
+		if (b == 0)
+        	throw new IllegalArgumentException();
+        else
+        	isDivisbleByB = a % b == 0;
+		return isDivisbleByB;
+//        	return (a % b == 0); (same as above)
     }
+    
 
     /**
      * Generates a divisibility message for a given number. Returns null if the given number is not divisible by 3 or 5.
@@ -41,7 +51,14 @@ public class FizzBuzz {
      * @return a message according to the format above, or null if n is not divisible by either 3 or 5
      */
     public static String message(int n) {
-        throw new NotImplementedException();
+    	if (divides (n, 3) && divides (n, 5))
+    		return n + ": FizzBuzz";
+    	if (divides (n, 5))
+    		return n + ": Buzz";
+    	if (divides (n, 3))
+    		return n + ": Fizz";
+    	else
+    		return null;
     }
 
     /**
@@ -54,8 +71,18 @@ public class FizzBuzz {
      * @return an array of divisibility messages
      * @throws IllegalArgumentException if the given end is less than the given start
      */
-    public static String[] messages(int start, int end) throws IllegalArgumentException {
-        throw new NotImplementedException();
+    public static String[] messages(int start, int end) {
+        if (end < start)
+        	throw new IllegalArgumentException();
+        List<String> a = new ArrayList<String>();
+		for(int i = start; i < end; i++){
+			String msg = message(i);
+			if (msg != null)
+				a.add(msg);
+		}
+		String[] arr = new String[a.size()];
+		arr = a.toArray(arr);
+        return arr;
     }
 
     /**
@@ -63,7 +90,9 @@ public class FizzBuzz {
      * the relevant messages to sysout
      */
     public static void main(String[] args) {
-        throw new NotImplementedException();
+       String[] msg = messages(1, 115);
+       for(int i = 0; i < msg.length; i++)
+    	   System.out.println(msg[i]);
     }
 
 }

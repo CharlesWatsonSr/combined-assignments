@@ -1,8 +1,13 @@
 package com.cooksys.ftd.assignments.control;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
+
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
+ * 
  * The Fibonacci sequence is simply and recursively defined: the first two elements are `1`, and
  * every other element is equal to the sum of its two preceding elements. For example:
  * <p>
@@ -23,9 +28,18 @@ public class Fibonacci {
      * @return the calculated element
      * @throws IllegalArgumentException if the given index is less than zero
      */
-    public static int atIndex(int i) throws IllegalArgumentException {
-        throw new NotImplementedException();
-    }
+    public static int atIndex(int i) {
+    	if (i < 0) {
+    		throw new IllegalArgumentException();
+    	}
+    	 int x = 0, y = 1, z = 1;
+         for (int n = 0; n < 144; i++) {
+        	 x = 0;
+             y = x;
+             z = x + y;
+         }
+         return z;
+    	}
 
     /**
      * Calculates a slice of the fibonacci sequence, starting from a given start index (inclusive) and
@@ -38,7 +52,20 @@ public class Fibonacci {
      *                                  given end is less than the given start
      */
     public static int[] slice(int start, int end) throws IllegalArgumentException {
-        throw new NotImplementedException();
+    	if (end < start) {
+        	throw new IllegalArgumentException();
+    	}
+    	else if (start < 0) {
+    		throw new IllegalArgumentException();
+    	}
+    	else if (end < 0) {
+    		throw new IllegalArgumentException();
+    	}
+    	
+    	
+    	
+		return null;
+    		
     }
 
     /**
@@ -48,7 +75,13 @@ public class Fibonacci {
      * @return the beginning of the fibonacci sequence, up to the given count, as an array of int elements
      * @throws IllegalArgumentException if the given count is negative
      */
-    public static int[] fibonacci(int count) throws IllegalArgumentException {
-        throw new NotImplementedException();
+    public static int[] fibonacci(int count) {
+        if (count < 0) {
+        	throw new IllegalArgumentException();
+        }
+        List<String> a = new ArrayList<String>();
+        	
+			return null;
+		}
     }
-}
+
