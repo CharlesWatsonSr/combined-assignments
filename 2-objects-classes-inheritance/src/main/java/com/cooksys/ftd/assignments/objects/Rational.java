@@ -1,8 +1,14 @@
 package com.cooksys.ftd.assignments.objects;
 
+import static org.junit.Assert.assertEquals;
+
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 public class Rational implements IRational {
+	
+	private int n;
+	private int d;
+	
     /**
      * Constructor for rational values of the type:
      * <p>
@@ -14,8 +20,11 @@ public class Rational implements IRational {
      * @param denominator the denominator of the rational value
      * @throws IllegalArgumentException if the given denominator is 0
      */
-    public Rational(int numerator, int denominator) throws IllegalArgumentException {
-        throw new NotImplementedException();
+    public Rational(int numerator, int denominator) {
+    	if (denominator == 0)
+    		throw new IllegalArgumentException();
+    	n = numerator;
+    	d = denominator;
     }
 
     /**
@@ -23,7 +32,7 @@ public class Rational implements IRational {
      */
     @Override
     public int getNumerator() {
-        throw new NotImplementedException();
+        return n;
     }
 
     /**
@@ -31,7 +40,7 @@ public class Rational implements IRational {
      */
     @Override
     public int getDenominator() {
-        throw new NotImplementedException();
+       return d;
     }
 
     /**
@@ -46,9 +55,12 @@ public class Rational implements IRational {
      * @throws IllegalArgumentException if the given denominator is 0
      */
     @Override
-    public Rational construct(int numerator, int denominator) throws IllegalArgumentException {
-        throw new NotImplementedException();
-    }
+    public Rational construct(int numerator, int denominator) {
+    	if (denominator == 0)
+    		throw new IllegalArgumentException();
+		return new Rational(numerator, denominator);
+    } 
+    
 
     /**
      * @param obj the object to check this against for equality
@@ -58,8 +70,15 @@ public class Rational implements IRational {
      */
     @Override
     public boolean equals(Object obj) {
-        throw new NotImplementedException();
-    }
+    	
+        Rational r;
+		if (obj instanceof Rational){
+        	r = (Rational)obj;
+        	if (r.getNumerator() == n && r.getDenominator() == d)
+        		return true;
+		}
+		return false;
+}
 
     /**
      * If this is positive, the string should be of the form `numerator/denominator`
@@ -70,6 +89,7 @@ public class Rational implements IRational {
      */
     @Override
     public String toString() {
-        throw new NotImplementedException();
-    }
+    	
+    	return (n < 0 != d < 0 ? "-" : "") + Math.abs(n) + "/" + Math.abs(d);
+    		   }
 }
