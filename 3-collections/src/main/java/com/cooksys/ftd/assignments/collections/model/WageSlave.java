@@ -1,23 +1,33 @@
 package com.cooksys.ftd.assignments.collections.model;
 
+import static org.junit.Assert.assertEquals;
+
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 public class WageSlave implements Capitalist {
 
-    public WageSlave(String name, int salary) {
-        throw new NotImplementedException();
+    private int salary;
+	private String name;
+	private FatCat owner;
+
+	public WageSlave(String name, int salary) {
+    	this.name = name;
+    	this.salary = salary;
     }
 
     public WageSlave(String name, int salary, FatCat owner) {
-        throw new NotImplementedException();
+    	this.name = name;
+    	this.salary = salary;
+    	this.owner = owner;
     }
-
+    
     /**
      * @return the name of the capitalist
      */
     @Override
     public String getName() {
-        throw new NotImplementedException();
+    	
+        return getName();
     }
 
     /**
@@ -25,7 +35,7 @@ public class WageSlave implements Capitalist {
      */
     @Override
     public int getSalary() {
-        throw new NotImplementedException();
+    	return getSalary();
     }
 
     /**
@@ -33,7 +43,9 @@ public class WageSlave implements Capitalist {
      */
     @Override
     public boolean hasParent() {
-        throw new NotImplementedException();
+        if (hasParent() == true)
+        	return true;
+        else return false;
     }
 
     /**
@@ -41,6 +53,8 @@ public class WageSlave implements Capitalist {
      */
     @Override
     public FatCat getParent() {
-        throw new NotImplementedException();
+        if (getParent() == null)
+        	return null;
+        return getParent();
     }
 }

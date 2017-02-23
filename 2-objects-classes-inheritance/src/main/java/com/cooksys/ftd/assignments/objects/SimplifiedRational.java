@@ -16,7 +16,7 @@ public class SimplifiedRational implements IRational {
     		throw new IllegalArgumentException();
     	else if (b < 0)
     		throw new IllegalArgumentException();
-		return a; //or b
+		return gcd(a , b);
     	
     }
 

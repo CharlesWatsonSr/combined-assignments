@@ -5,11 +5,16 @@ import com.cooksys.ftd.assignments.collections.model.Capitalist;
 import com.cooksys.ftd.assignments.collections.model.FatCat;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
+import static org.junit.Assert.assertFalse;
+
 import java.util.*;
 
 public class MegaCorp implements Hierarchy<Capitalist, FatCat> {
+	
+    private Capitalist capitalist;
+    
 
-    /**
+	/**
      * Adds a given element to the hierarchy.
      * <p>
      * If the given element is already present in the hierarchy,
@@ -24,12 +29,24 @@ public class MegaCorp implements Hierarchy<Capitalist, FatCat> {
      * If the given element has no parent and is not a Parent itself,
      * do not add it and return false
      *
-     * @param capitalist the element to add to the hierarchy
+     * @param capitalist the element to add to the >>>hierarchy<<<
      * @return true if the element was added successfully, false otherwise
      */
     @Override
     public boolean add(Capitalist capitalist) {
-        throw new NotImplementedException();
+    	if (capitalist == null); 
+    	
+    	
+    	if (capitalist.hasParent())
+    		
+    	
+    	
+//    	HashSet<String> hs = new HashSet<String>();
+//    	hs.add("capitalist");
+//    	if (hs.contains(capitalist))
+//    		return true;
+    	return false;
+    	
     }
 
     /**
@@ -38,7 +55,9 @@ public class MegaCorp implements Hierarchy<Capitalist, FatCat> {
      */
     @Override
     public boolean has(Capitalist capitalist) {
-        throw new NotImplementedException();
+    	
+		return false;
+        
     }
 
     /**
@@ -47,7 +66,8 @@ public class MegaCorp implements Hierarchy<Capitalist, FatCat> {
      */
     @Override
     public Set<Capitalist> getElements() {
-        throw new NotImplementedException();
+		return null;
+        
     }
 
     /**
@@ -88,6 +108,7 @@ public class MegaCorp implements Hierarchy<Capitalist, FatCat> {
      */
     @Override
     public List<FatCat> getParentChain(Capitalist capitalist) {
-        throw new NotImplementedException();
+        this.capitalist = capitalist;
+		return null;
     }
 }
