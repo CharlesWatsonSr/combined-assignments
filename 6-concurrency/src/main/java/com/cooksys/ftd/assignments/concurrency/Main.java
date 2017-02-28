@@ -1,6 +1,19 @@
 package com.cooksys.ftd.assignments.concurrency;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+import java.io.File;
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
+
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
+
+import org.omg.CosNaming.NamingContextExtPackage.AddressHelper;
+
+import com.cooksys.ftd.assignments.concurrency.model.config.Config;
+import com.cooksys.ftd.assignments.concurrency.model.config.ServerConfig;
 
 public class Main {
 
@@ -13,8 +26,18 @@ public class Main {
      *
      * If the embedded {@link com.cooksys.ftd.assignments.concurrency.model.config.ClientConfig} object
      * is not disabled, create a {@link Client} object with the client config ans spin off a thread to run it.
+     * @throws JAXBException 
+     * @throws IOException 
      */
-    public static void main(String[] args) {
-       throw new NotImplementedException();
-    }
+    public static void main(String[] args) throws IOException {
+    	ServerSocket socket = new ServerSocket(80);
+        while (true) {
+        	Socket connection = socket.accept();
+        	Runnable task = new Runnable() {
+        		public void run() {
+        			handleRequest(connection);}
+        		};
+        		new Thread(task).start();}
+        
+     }
 }

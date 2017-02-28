@@ -11,12 +11,11 @@ public class SimplifiedRational implements IRational {
      * @return the greatest common denominator, or shared factor, of `a` and `b`
      * @throws IllegalArgumentException if a <= 0 or b < 0
      */
-    public static int gcd(int a, int b) throws IllegalArgumentException {
-    	if (a <= 0)
+    public static int gcd(int a, int b) {
+    	if (a <= 0 || b < 0)
     		throw new IllegalArgumentException();
-    	else if (b < 0)
-    		throw new IllegalArgumentException();
-		return gcd(a , b);
+    	if(a == 0 ||b == 0) return a+b;
+		return gcd(b, a%b);
     	
     }
 
@@ -33,12 +32,13 @@ public class SimplifiedRational implements IRational {
      * @return a two element array representation of the simplified numerator and denominator
      * @throws IllegalArgumentException if the given denominator is 0
      */
-    public static int[] simplify(int numerator, int denominator) throws IllegalArgumentException {
+    public static int[] simplify(int numerator, int denominator) {
     	if (denominator == 0)
     		throw new IllegalArgumentException();
-    	
-		return null;//??
-    	 
+    	int common = gcd(numerator, denominator);
+     	numerator /= common;
+     	denominator /= common;
+     	return null;
     }
 
     /**
@@ -53,8 +53,14 @@ public class SimplifiedRational implements IRational {
      * @param denominator the denominator of the rational value
      * @throws IllegalArgumentException if the given denominator is 0
      */
-    public SimplifiedRational(int numerator, int denominator) throws IllegalArgumentException {
-        throw new NotImplementedException();
+    public SimplifiedRational(int numerator, int denominator) {
+    	int n = numerator;
+    	int d = denominator;
+        if (denominator == 0)
+        	throw new IllegalArgumentException();
+        int common = gcd(n, d);
+     	n /= common;
+     	d /= common;
     }
 
     /**
@@ -62,7 +68,7 @@ public class SimplifiedRational implements IRational {
      */
     @Override
     public int getNumerator() {
-        throw new NotImplementedException();
+		return 0;
     }
 
     /**
@@ -70,7 +76,8 @@ public class SimplifiedRational implements IRational {
      */
     @Override
     public int getDenominator() {
-        throw new NotImplementedException();
+		return this.getDenominator();
+       
     }
 
     /**

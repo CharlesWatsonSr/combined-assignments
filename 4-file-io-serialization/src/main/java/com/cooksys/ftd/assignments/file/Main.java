@@ -4,9 +4,23 @@ import com.cooksys.ftd.assignments.file.model.Contact;
 import com.cooksys.ftd.assignments.file.model.Instructor;
 import com.cooksys.ftd.assignments.file.model.Session;
 import com.cooksys.ftd.assignments.file.model.Student;
+import com.pholser.junit.quickcheck.internal.Items;
 
+import javax.xml.bind.JAXB;
 import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
+import javax.xml.bind.UnmarshallerHandler;
+import javax.xml.bind.annotation.XmlAttribute;
+
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileReader;
+import java.io.IOException;
+import java.rmi.UnmarshalException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Main {
@@ -19,9 +33,14 @@ public class Main {
      * @param studentContactFile the XML file to use
      * @param jaxb the JAXB context to use
      * @return a {@link Student} object built using the {@link Contact} data in the given file
+     * @throws JAXBException 
      */
-    public static Student readStudent(File studentContactFile, JAXBContext jaxb) {
-        return null; // TODO
+    public static Student readStudent(File studentContactFile, JAXBContext jaxb) throws JAXBException {
+    	Unmarshaller jaxUnmarshaller = jaxb.createUnmarshaller();
+    	Contact contact = (Contact) jaxUnmarshaller.unmarshal(studentContactFile);
+    	Student student = new Student();
+    	student.setContact(contact);
+    	return student;
     }
 
     /**
@@ -32,7 +51,12 @@ public class Main {
      * @return a list of {@link Student} objects built using the contact files in the given directory
      */
     public static List<Student> readStudents(File studentDirectory, JAXBContext jaxb) {
-        return null; // TODO
+      File[] fileArray = studentDirectory.listFiles();
+      
+      ArrayList<File> studentList = new ArrayList<File>(Arrays.asList(fileArray));
+      for 
+      
+    	return 
     }
 
     /**
@@ -60,7 +84,7 @@ public class Main {
      * @return a {@link Session} object built from the data in the given directory
      */
     public static Session readSession(File rootDirectory, JAXBContext jaxb) {
-        return null; // TODO
+        return null;
     }
 
     /**
@@ -99,8 +123,17 @@ public class Main {
      *               ...
      *           </students>
      *      </session>
+     * @throws JAXBException 
      */
-    public static void main(String[] args) {
-        // TODO
+    
+    public static void main(String[] args) throws IOException, JAXBException{
+    	JAXBContext jaxb = JAXBContext.newInstance(Session.class);
+    	
+    	Marshaller marshall = jaxb.createMarshaller();
+    	marshall.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+    	
+    	readStudent(new File("input/memphis/08-08-2016/students/adam-fraser.xml"), jaxb);
+    	
+         }
     }
-}
+    

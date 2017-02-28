@@ -1,19 +1,26 @@
 package com.cooksys.ftd.assignments.collections;
 
+import static org.junit.Assert.assertEquals;
+
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import javax.print.attribute.standard.RequestingUserName;
+
 import com.cooksys.ftd.assignments.collections.hierarchy.Hierarchy;
 import com.cooksys.ftd.assignments.collections.model.Capitalist;
 import com.cooksys.ftd.assignments.collections.model.FatCat;
+import com.cooksys.ftd.assignments.collections.model.WageSlave;
+
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
-import static org.junit.Assert.assertFalse;
-
-import java.util.*;
 
 public class MegaCorp implements Hierarchy<Capitalist, FatCat> {
 	
-    private Capitalist capitalist;
-    
-
+	HashSet<Capitalist> hs = new HashSet<Capitalist>();
+	
 	/**
      * Adds a given element to the hierarchy.
      * <p>
@@ -29,25 +36,34 @@ public class MegaCorp implements Hierarchy<Capitalist, FatCat> {
      * If the given element has no parent and is not a Parent itself,
      * do not add it and return false
      *
-     * @param capitalist the element to add to the >>>hierarchy<<<
+     * @param capitalist the element to add to the hierarchy
      * @return true if the element was added successfully, false otherwise
      */
     @Override
     public boolean add(Capitalist capitalist) {
-    	if (capitalist == null); 
+    	if(capitalist == null) {
+    		return false;
+    	}
+        
+    	if (this.has(capitalist))
+    		return false;
     	
-    	
-    	if (capitalist.hasParent())
-    		
-    	
-    	
-//    	HashSet<String> hs = new HashSet<String>();
-//    	hs.add("capitalist");
-//    	if (hs.contains(capitalist))
-//    		return true;
-    	return false;
-    	
+    	if (capitalist.hasParent() && !this.has(capitalist.getParent())) {
+    		this.add(capitalist.getParent());
+    		this.add(capitalist);
+    	}
+    	FatCat fc;
+		if (capitalist instanceof FatCat) {
+    		fc = (FatCat) capitalist;
+    	if (!fc.hasParent() && !this.getChildren(fc).isEmpty())
+    		this.add(fc);
+    	}
+		
+		return false;
     }
+
+    	
+    
 
     /**
      * @param capitalist the element to search for
@@ -55,8 +71,8 @@ public class MegaCorp implements Hierarchy<Capitalist, FatCat> {
      */
     @Override
     public boolean has(Capitalist capitalist) {
+    		return hs.contains(capitalist);
     	
-		return false;
         
     }
 
@@ -66,7 +82,12 @@ public class MegaCorp implements Hierarchy<Capitalist, FatCat> {
      */
     @Override
     public Set<Capitalist> getElements() {
-		return null;
+		Iterator<Capitalist> itr = hsM.iterator();
+		while(itr.hasNext()){
+	          System.out.println(itr.next());
+	        }
+		
+    	return this.getElements();
         
     }
 
@@ -76,9 +97,10 @@ public class MegaCorp implements Hierarchy<Capitalist, FatCat> {
      */
     @Override
     public Set<FatCat> getParents() {
-        throw new NotImplementedException();
+        return this.getParents();
     }
 
+    
     /**
      * @param fatCat the parent whose children need to be returned
      * @return all elements in the hierarchy that have the given parent as a direct parent,
@@ -87,7 +109,9 @@ public class MegaCorp implements Hierarchy<Capitalist, FatCat> {
      */
     @Override
     public Set<Capitalist> getChildren(FatCat fatCat) {
-        throw new NotImplementedException();
+    	if (fatCat == null)
+        return this.getChildren(fatCat);//??
+		return hs;
     }
 
     /**
@@ -97,7 +121,7 @@ public class MegaCorp implements Hierarchy<Capitalist, FatCat> {
      */
     @Override
     public Map<FatCat, Set<Capitalist>> getHierarchy() {
-        throw new NotImplementedException();
+        return this.getHierarchy();
     }
 
     /**
@@ -108,7 +132,7 @@ public class MegaCorp implements Hierarchy<Capitalist, FatCat> {
      */
     @Override
     public List<FatCat> getParentChain(Capitalist capitalist) {
-        this.capitalist = capitalist;
-		return null;
+        
+		return this.getParentChain(capitalist);
     }
 }
